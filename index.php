@@ -1,14 +1,14 @@
 
 
-<form method="post">
-<input type="text" name="a1">
-<input type="text" name="a2">
+<form enctype="multipart/form-data" method="post">
+<input type="hidden" name="MAX_FILE_SIZE" value="500000">
+<input type="file" name="f">
 <input type="submit">
 </form>
 
 <?php
-if ($_POST["a1"])
-	echo $_POST["a1"];
+if ($_POST["f"])
+	echo $_POST["f"];
 else
-	echo "not set";
+	echo "not file";
 ?>
