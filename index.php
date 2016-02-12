@@ -12,7 +12,7 @@ if ($_FILES["f"])
 	if (is_uploaded_file($_FILES["f"]["tmp_name"]))
 	{
 		$f = fopen($_FILES["f"]["tmp_name"], "rb");
-		$d = fread($f, 10);
+		$d = fread($f, 20);
 		echo $d;
 	}
 }
