@@ -89,7 +89,11 @@ if ($_FILES["f"])
 		
 		echo "<textarea rows=4 cols=20>".$str_out."</textarea>";
 		
+		// TODO select transparent color
 		// TODO 32 bpp
+		// TODO larger than 40x30, truncate
+		// TODO maybe resizing code?
+		// TODO copy file. show preview
 		
 		exit("<br> all good");
 	}
@@ -100,7 +104,7 @@ else
 <head><title>bmp to drawing</title></head>
 bmp must be exactly 40x30 and 24bpp (Paint works)<br>
 White color means transparent<br>
-maybe I'll features soon<br><br>
+maybe I'll add features soon<br><br>
 <form enctype="multipart/form-data" method="post">
 <input type="hidden" name="MAX_FILE_SIZE" value="50000">
 <input type="file" name="f">
