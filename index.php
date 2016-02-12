@@ -45,7 +45,7 @@ if ($_FILES["f"])
 		if (fseek($f, $pixel_offset, SEEK_SET) != 0)
 			exit("ERROR: fseek failed");
 			
-		$row_bytes = (int)(($bmp_width * $bmp_bpp + 31)/32);
+		$row_bytes = 4*(int)(($bmp_width * $bmp_bpp + 31)/32);
 		
 		echo "w: ".$bmp_width."<br>";
 		echo "h: ".$bmp_height."<br>";
