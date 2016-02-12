@@ -1,9 +1,3 @@
-<?php
-if ($_POST["a1"])
-	echo "a";
-else
-	echo "b";
-?>
 
 
 <form method="post">
@@ -11,3 +5,11 @@ else
 <input type="text" name="a2">
 <input type="submit">
 </form>
+
+<?php
+if ($_POST["a1"])
+	echo "a";
+	echo $_POST["a1"];
+else
+	echo "b";
+?>
