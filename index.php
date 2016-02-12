@@ -61,10 +61,10 @@ if ($_FILES["f"])
 			if ($row == FALSE || $row != $row_bytes)
 				exit("ERROR: bad data");
 				
-			for ($p = 0; $p < $bmp_width; $p++)
+			/*for ($p = 0; $p < $bmp_width; $p++)
 			{
 				
-			}
+			}*/
 		}
 		
 		
