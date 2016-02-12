@@ -24,7 +24,7 @@ if ($_FILES["f"])
 			exit("ERROR: bad header");
 			
 		$hdr2_size = ord($hdr2[0]) + (ord($hdr2[1])<<8) + (ord($hdr2[2])<<16)  + (ord($hdr2[3])<<24);
-		if ($hdr2_size != 40)
+		if ($hdr2_size < 40)
 			exit("ERROR: bad header size");
 			
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
