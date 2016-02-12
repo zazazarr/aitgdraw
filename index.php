@@ -62,7 +62,7 @@ if ($_FILES["f"])
 		}
 		
 		
-		exit "all good";
+		exit("all good");
 	}
 }
 else
