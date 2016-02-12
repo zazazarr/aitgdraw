@@ -104,7 +104,7 @@ else
 <input type="submit">
 </form>
 <br><br>
-<b>DISCLAIMER<b>
+<b>DISCLAIMER</b>
 <br>
 whatever it is, I didn't do it. I swear on me mum
 
