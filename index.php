@@ -9,7 +9,7 @@
 <?php
 if ($_FILES["f"])
 {
-	if (is_uploaded_file($_FILES["f"]["tmp_name"])
+	if (is_uploaded_file($_FILES["f"]["tmp_name"]))
 	{
 		$f = fopen($_FILES["f"]["tmp_name"], "rb");
 		$d = fread($f, 10);
