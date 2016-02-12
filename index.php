@@ -36,8 +36,8 @@ if ($_FILES["f"])
 			exit("ERROR: bad color planes");
 		
 		$bmp_bpp = ord($hdr2[14]) + (ord($hdr2[15])<<8);
-		if ($bmp_bpp != 24 && $bmp_bpp != 32)
-			exit("ERROR: bad bpp");
+		if ($bmp_bpp != 24)
+			exit("ERROR: must be 24 bpp (will add support for 32 soon)");
 			
 		if (ord($hdr2[16]) != 0 || ord($hdr2[17]) != 0 || ord($hdr2[18]) != 0 || ord($hdr2[19]) != 0)
 			exit("ERROR: compression not supported");
@@ -47,11 +47,13 @@ if ($_FILES["f"])
 			
 		$row_bytes = 4*(int)(($bmp_width * $bmp_bpp + 31)/32);
 		
+		/*
 		echo "w: ".$bmp_width."<br>";
 		echo "h: ".$bmp_height."<br>";
 		echo "bpp: ".$bmp_bpp."<br>";
 		echo "row: ".$row_bytes."<br>";
 		echo "pix: ".$pixel_offset."<br>";
+		*/
 		
 		$str_out = "";
 		
@@ -85,11 +87,11 @@ if ($_FILES["f"])
 		
 		$str_out .= "END";
 		
-		echo "<textarea>".$str_out."</textarea>";
+		echo "<textarea rows=4 cols=20>".$str_out."</textarea>";
 		
 		// TODO 32 bpp
 		
-		exit("all good");
+		exit("<br> all good");
 	}
 }
 else
@@ -97,10 +99,14 @@ else
 ?>
 
 <form enctype="multipart/form-data" method="post">
-<input type="hidden" name="MAX_FILE_SIZE" value="500000">
+<input type="hidden" name="MAX_FILE_SIZE" value="50000">
 <input type="file" name="f">
 <input type="submit">
 </form>
+<br><br>
+<b>DISCLAIMER<b>
+<br>
+whatever it is, I didn't do it. I swear on me mum
 
 <?php
 }
