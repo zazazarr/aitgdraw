@@ -64,8 +64,9 @@ if ($_FILES["f"])
 				$pos = 0;
 				for ($p = 0; $p < $bmp_width; $p++)
 				{
-					$clr = sprintf("%X", substr($row, pos, 3));
-					echo "<br>".$clr."   ---   ".substr($row,pos,3);
+					$n = ord($row[pos]) + (ord($row[pos+1]<<8) + (ord($row[pos+2]<<16);
+					$clr = sprintf("%X", n);
+					echo "<br>".$clr."   ---   ".n;
 					$pos += 3;
 				}
 				
