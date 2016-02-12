@@ -64,7 +64,7 @@ if ($_FILES["f"])
 				$pos = 0;
 				for ($p = 0; $p < $bmp_width; $p++)
 				{
-					$clr = bin2hex(substr($row, pos, 3));
+					$clr = sprintf("%X", substr($row, pos, 3));
 					echo "<br>".$clr."   ---   ".substr($row,pos,3);
 					$pos += 3;
 				}
