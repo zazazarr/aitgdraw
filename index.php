@@ -45,14 +45,18 @@ if ($_FILES["f"])
 			
 		if (fseek($f, 111, SEEK_SET) != 0)
 			echo "ERROR: fseek failed";
+			
+		$row_bytes = intdiv($bmp_width * $bmp_bpp + 31, 32);
 		
 		echo "w: ".$bmp_width."<br>";
 		echo "h: ".$bmp_height."<br>";
 		echo "bpp: ".$bmp_bpp."<br>";
+		echo "row: ".$row_bytes."<br>";
+		
+		
 		
 		for ($i = 0; $i < $bmp_height; $i++)
 		{
-			$row_bytes = intdiv($bmp_width * $bmp_bpp + 31, 32);
 			echo "<br>".$row_bytes;
 		}
 		
