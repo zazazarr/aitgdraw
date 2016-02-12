@@ -66,7 +66,7 @@ if ($_FILES["f"])
 				{
 					$n = ord($row[pos]) + (ord($row[pos+1])<<8) + (ord($row[pos+2])<<16);
 					$clr = sprintf("%X", $n);
-					echo "<br>".$clr."   ---   ".$n;
+					echo "<br>".$clr."   ---   ".$n."  ---  ".$pos;
 					$pos += 3;
 				}
 				
