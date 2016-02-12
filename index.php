@@ -22,7 +22,7 @@ if ($_FILES["f"])
 		$hdr_s = $f_hdr[2] + $f_hdr[3]<<8;
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
 			echo "ERROR: bad bitmap";
-			
+			echo filesize($_FILES["f"]["tmp_name"]);
 		echo "all good";
 	}
 }
