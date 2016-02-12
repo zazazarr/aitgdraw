@@ -8,8 +8,7 @@
 
 <?php
 if ($_POST["a1"])
-	echo "a";
-	echo "$_POST['a1']";
+	echo $_POST["a1"];
 else
-	echo "b";
+	echo "not set";
 ?>
