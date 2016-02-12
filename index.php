@@ -29,8 +29,8 @@ if ($_FILES["f"])
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
-		if ($bmp_width == 0 || $bmp_height == 0)
-			exit("ERROR: bad dimensions");
+		if ($bmp_width != 40 || $bmp_height != 30)
+			exit("ERROR: bad dimensions (must be 40x30");
 		
 		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
 			exit("ERROR: bad color planes");
@@ -53,6 +53,8 @@ if ($_FILES["f"])
 		echo "row: ".$row_bytes."<br>";
 		echo "pix: ".$pixel_offset."<br>";
 		
+		$str_out = "";
+		
 		if ($bmp_bpp == 24)
 		{
 			for ($i = 0; $i < $bmp_height; $i++)
@@ -65,14 +67,23 @@ if ($_FILES["f"])
 				for ($p = 0; $p < $bmp_width; $p++)
 				{
 					$n = ord($row[$pos]) + (ord($row[$pos+1])<<8) + (ord($row[$pos+2])<<16);
-					$clr = sprintf("%X", $n);
-					echo "<br>".$clr."   ---   ".$n."  ---  ".$pos;
 					$pos += 3;
+					
+					if ($n != 0xFFFFFF)
+					{
+						$clr = sprintf("%X", $n);
+						
+						if ($p < 30)
+							$str_out .= $i*30+$p . "," . $clr . ",100,";
+						else
+							$str_out .= 900+$i*10+$p-30 . "," . $clr . ",100,";
+					}
+					
 				}
-				
-				echo "row ".$i." done<br>";
 			}
 		}
+		
+		$str_out .= "END";
 		
 		// TODO 32 bpp
 		
