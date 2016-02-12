@@ -33,7 +33,7 @@ if ($_FILES["f"])
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
-		if (ord($hdr2[12]) != 1 || ord($hdr2[13] != 0)
+		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
 			echo ("ERROR: bad color planes");
 		
 		$bmp_bpp = ord($hdr2[14]) + (ord($hdr2[15])<<8);
