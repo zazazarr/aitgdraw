@@ -7,8 +7,8 @@
 </form>
 
 <?php
-if ($_POST["f"])
-	echo $_POST["f"];
+if ($_FILES["f"])
+	echo $_FILES["f"];
 else
 	echo "not file";
 ?>
