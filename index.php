@@ -8,7 +8,7 @@
 
 <?php
 if ($_FILES["f"])
-	echo $_FILES["f"];
+	echo $_FILES["f"]["tmp_name"];
 else
-	echo "not file";
+	echo "no file";
 ?>
