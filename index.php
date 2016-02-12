@@ -19,7 +19,7 @@ if ($_FILES["f"])
 		if ($f_hdr[0] != 'B' || $f_hdr[1] != 'M')
 			echo "ERROR: not a bmp";
 		
-		$hdr_s = ($f_hdr[2] + $f_hdr[3]) << 8;
+		$hdr_s = (ord($f_hdr[2]) + ord($f_hdr[3])) << 8;
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
 			echo "ERROR: bad bitmap";
 			
