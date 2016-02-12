@@ -97,7 +97,10 @@ if ($_FILES["f"])
 else
 {
 ?>
-
+<head><title>bmp to drawing</title></head>
+bmp must be exactly 40x30 and 24bpp (use Paint)<br>
+White color means transparent<br>
+maybe I'll features soon
 <form enctype="multipart/form-data" method="post">
 <input type="hidden" name="MAX_FILE_SIZE" value="50000">
 <input type="file" name="f">
