@@ -8,37 +8,42 @@ if ($_FILES["f"])
 		$f = fopen($_FILES["f"]["tmp_name"], "rb");
 		$f_hdr = fread($f, 14);
 		if ($f_hdr == FALSE || strlen($f_hdr) != 14)
-			echo "ERROR: bad file";
+			exit("ERROR: bad file");
 		
 		if ($f_hdr[0] != 'B' || $f_hdr[1] != 'M')
-			echo "ERROR: not a bmp";
+			exit("ERROR: not a bmp");
 		
 		$hdr_s = ord($f_hdr[2]) + (ord($f_hdr[3]) << 8);
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
-			echo "ERROR: bad bmp size";
+			exit("ERROR: bad bmp size");
+			
+		$pixel_offset = ord($f_hdr[10]) + (ord($f_hdr[11])<<8) + (ord($f_hdr[12])<<16) + (ord($f_hdr[13])<<24);
 			
 		$hdr2 = fread($f, 40);
 		if ($hdr2 == FALSE || strlen($hdr2) != 40)
-			echo "ERROR: bad header";
+			exit("ERROR: bad header)";
 			
 		if (ord($hdr2[0]) != 40 || ord($hdr2[1]) != 0 || ord($hdr2[2]) != 0 || ord($hdr2[3]) != 0)
-			echo "ERROR: bad header size";
+			exit("ERROR: bad header size)";
 			
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
+		if ($bmp_width == 0 || $bmp_height == 0)
+			exit("ERROR: bad dimensions");
+		
 		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
-			echo "ERROR: bad color planes";
+			exit("ERROR: bad color planes");
 		
 		$bmp_bpp = ord($hdr2[14]) + (ord($hdr2[15])<<8);
 		if ($bmp_bpp != 24 && $bmp_bpp != 32)
-			echo "ERROR: bad bpp";
+			exit("ERROR: bad bpp");
 			
 		if (ord($hdr2[16]) != 0 || ord($hdr2[17]) != 0 || ord($hdr2[18]) != 0 || ord($hdr2[19]) != 0)
-			echo "ERROR: compression not supported";
+			exit("ERROR: compression not supported");
 			
-		if (fseek($f, 111, SEEK_SET) != 0)
-			echo "ERROR: fseek failed";
+		if (fseek($f, $pixel_offset, SEEK_SET) != 0)
+			exit("ERROR: fseek failed");
 			
 		$row_bytes = (int)(($bmp_width * $bmp_bpp + 31)/32);
 		
@@ -53,7 +58,7 @@ if ($_FILES["f"])
 		{
 			$row = fread($f, $row_bytes);
 			if ($row == FALSE || $row != $row_bytes)
-				echo "ERROR: bad data";
+				exit("ERROR: bad data");
 				
 			for ($p = 0; $p < $bmp_width; $p++)
 			{
