@@ -1,6 +1,3 @@
-<!doctype html>
-<html>
-<body>
-rofl
-</body>
-</html>
+<?php
+echo $_SERVER['HTTP_USER_AGENT'];
+?>
