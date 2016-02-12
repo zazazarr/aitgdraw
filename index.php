@@ -58,7 +58,7 @@ if ($_FILES["f"])
 		for ($i = 0; $i < $bmp_height; $i++)
 		{
 			$row = fread($f, $row_bytes);
-			if ($row == FALSE || $row != $row_bytes)
+			if ($row == FALSE || strlen($row) != $row_bytes)
 				exit("ERROR: bad data");
 				
 			for ($p = 0; $p < $bmp_width; $p++)
