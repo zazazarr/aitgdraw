@@ -23,9 +23,10 @@ if ($_FILES["f"])
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
 			echo "ERROR: bad bitmap";
 			echo $hdr_s;
+			echo "<br>";
 			echo filesize($_FILES["f"]["tmp_name"]);
 			echo "<br>";
-			echo $f_hdr[2]."<br>".$f_hdr[3];
+			echo ord($f_hdr[2])."<br>".ord($f_hdr[3]);
 		echo "all good";
 	}
 }
