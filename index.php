@@ -34,12 +34,24 @@ if ($_FILES["f"])
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
 		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
-			echo ("ERROR: bad color planes");
+			echo "ERROR: bad color planes";
 		
 		$bmp_bpp = ord($hdr2[14]) + (ord($hdr2[15])<<8);
-		
+		if ($bmp_bpp != 24 && $bmp_bpp != 32)
+			echo "ERROR: bad bpp";
+			
 		if (ord($hdr2[16]) != 0 || ord($hdr2[17]) != 0 || ord($hdr2[18]) != 0 || ord($hdr2[19]) != 0)
 			echo "ERROR: compression not supported";
+			
+		if (fseek($f, 111, SEEK_SET) != 0)
+			echo "ERROR: fseek failed";
+		
+		for ($i = 0; $i < $bmp_height; $i++)
+		{
+			$row_bytes = intdiv($bmp_width * $bmp_bpp + 31, 32);
+			echo "<br>".$row_bytes;
+		}
+		
 		
 		echo "all good";
 	}
