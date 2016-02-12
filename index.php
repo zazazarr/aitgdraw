@@ -17,15 +17,14 @@ if ($_FILES["f"])
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
 			exit("ERROR: bad bmp size");
 			
-		//$pixel_offset = ord($f_hdr[10]) + (ord($f_hdr[11])<<8) + (ord($f_hdr[12])<<16) + (ord($f_hdr[13])<<24);
-		$pixel_offset = 0;
+		$pixel_offset = ord($f_hdr[10]) + (ord($f_hdr[11])<<8) + (ord($f_hdr[12])<<16) + (ord($f_hdr[13])<<24);
 			
 		$hdr2 = fread($f, 40);
 		if ($hdr2 == FALSE || strlen($hdr2) != 40)
-			exit("ERROR: bad header)";
+			exit("ERROR: bad header");
 			
 		if (ord($hdr2[0]) != 40 || ord($hdr2[1]) != 0 || ord($hdr2[2]) != 0 || ord($hdr2[3]) != 0)
-			exit("ERROR: bad header size)";
+			exit("ERROR: bad header size");
 			
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
@@ -61,10 +60,10 @@ if ($_FILES["f"])
 			if ($row == FALSE || $row != $row_bytes)
 				exit("ERROR: bad data");
 				
-			/*for ($p = 0; $p < $bmp_width; $p++)
+			for ($p = 0; $p < $bmp_width; $p++)
 			{
 				
-			}*/
+			}
 		}
 		
 		
