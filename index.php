@@ -17,7 +17,8 @@ if ($_FILES["f"])
 		if ($hdr_s != filesize($_FILES["f"]["tmp_name"]))
 			exit("ERROR: bad bmp size");
 			
-		$pixel_offset = ord($f_hdr[10]) + (ord($f_hdr[11])<<8) + (ord($f_hdr[12])<<16) + (ord($f_hdr[13])<<24);
+		//$pixel_offset = ord($f_hdr[10]) + (ord($f_hdr[11])<<8) + (ord($f_hdr[12])<<16) + (ord($f_hdr[13])<<24);
+		$pixel_offset = 0;
 			
 		$hdr2 = fread($f, 40);
 		if ($hdr2 == FALSE || strlen($hdr2) != 40)
