@@ -53,22 +53,27 @@ if ($_FILES["f"])
 		echo "row: ".$row_bytes."<br>";
 		echo "pix: ".$pixel_offset."<br>";
 		
-		
-		
-		for ($i = 0; $i < $bmp_height; $i++)
+		if ($bmp_bpp == 24)
 		{
-			$row = fread($f, $row_bytes);
-			if ($row == FALSE || strlen($row) != $row_bytes)
-				exit("ERROR: bad data");
-				
-			for ($p = 0; $p < $bmp_width; $p++)
+			for ($i = 0; $i < $bmp_height; $i++)
 			{
+				$row = fread($f, $row_bytes);
+				if ($row == FALSE || strlen($row) != $row_bytes)
+					exit("ERROR: bad data");
 				
+				$pos = 0;
+				for ($p = 0; $p < $bmp_width; $p++)
+				{
+					$clr = bin2hex(substr($row, pos, 3);
+					echo "<br>".$clr;
+					$pos += 3;
+				}
+				
+				echo "row ".$i." done<br>";
 			}
-			
-			echo "row ".$i." done<br>";
 		}
 		
+		// TODO 32 bpp
 		
 		exit("all good");
 	}
