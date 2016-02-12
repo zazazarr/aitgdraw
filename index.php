@@ -1,11 +1,5 @@
 
 
-<form enctype="multipart/form-data" method="post">
-<input type="hidden" name="MAX_FILE_SIZE" value="500000">
-<input type="file" name="f">
-<input type="submit">
-</form>
-
 <?php
 if ($_FILES["f"])
 {
@@ -57,7 +51,14 @@ if ($_FILES["f"])
 		
 		for ($i = 0; $i < $bmp_height; $i++)
 		{
-			echo "<br>".$row_bytes;
+			$row = fread($f, $row_bytes);
+			if ($row == FALSE || $row != $row_bytes)
+				echo "ERROR: bad data";
+				
+			for ($p = 0; $p < $bmp_width; $p++)
+			{
+				
+			}
 		}
 		
 		
@@ -65,5 +66,15 @@ if ($_FILES["f"])
 	}
 }
 else
-	echo "no file";
+{
+?>
+
+<form enctype="multipart/form-data" method="post">
+<input type="hidden" name="MAX_FILE_SIZE" value="500000">
+<input type="file" name="f">
+<input type="submit">
+</form>
+
+<?php
+}
 ?>
