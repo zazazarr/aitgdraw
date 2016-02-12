@@ -85,6 +85,8 @@ if ($_FILES["f"])
 		
 		$str_out .= "END";
 		
+		echo "<textarea>".$str_out."</textarea>";
+		
 		// TODO 32 bpp
 		
 		exit("all good");
