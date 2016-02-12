@@ -98,7 +98,7 @@ else
 {
 ?>
 <head><title>bmp to drawing</title></head>
-bmp must be exactly 40x30 and 24bpp (use Paint)<br>
+bmp must be exactly 40x30 and 24bpp (Paint works)<br>
 White color means transparent<br>
 maybe I'll features soon<br><br>
 <form enctype="multipart/form-data" method="post">
