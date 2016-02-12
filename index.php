@@ -51,6 +51,7 @@ if ($_FILES["f"])
 		echo "h: ".$bmp_height."<br>";
 		echo "bpp: ".$bmp_bpp."<br>";
 		echo "row: ".$row_bytes."<br>";
+		echo "pix: ".$pixel_offset."<br>";
 		
 		
 		
@@ -64,6 +65,8 @@ if ($_FILES["f"])
 			{
 				
 			}
+			
+			echo "row ".$i." done<br>";
 		}
 		
 		
