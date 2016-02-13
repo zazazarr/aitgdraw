@@ -9,10 +9,10 @@ function get_key_color ($txt)
 	$s = 0;
 	for ($i = 0; $i < 6; $i++)
 	{
-		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= 'f'))
+		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= ord('f')))
 			$txt[i] = chr(ord($txt[i]) - 32);
 			echo $txt[i]."<br>";
-		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > '9' && ord($txt[i]) < 'A') || ord($txt[i]) > 'F')
+		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > ord('9') && ord($txt[i]) < ord('A')) || ord($txt[i]) > ord('F'))
 			return 0xFFFFFF;
 			
 		$n = ord($txt[i]) - 48;
