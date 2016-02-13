@@ -5,13 +5,13 @@ function get_key_color ($txt)
 {
 	if (strlen($txt) != 6)
 		return 0xFFFFFF;
-		
+	echo "ok<br>";
 	$s = 0;
 	for ($i = 0; $i < 6; $i++)
 	{
 		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= 'f'))
 			$txt[i] = chr(ord($txt[i]) - 32);
-			
+			echo $txt[i]."<br>";
 		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > '9' && ord($txt[i]) < 'A') || ord($txt[i]) > 'F')
 			return 0xFFFFFF;
 			
@@ -173,7 +173,7 @@ else
 ?>
 <head><title>bmp to drawing</title></head>
 bmp must be at least 40x30. cropped if larger<br>
-24bpp or 32bpp (ARGB)<br><br>
+24-bit or 32-bit (ARGB)<br><br>
 <form enctype="multipart/form-data" method="post">
 
 this color is omitted and becomes transparent
