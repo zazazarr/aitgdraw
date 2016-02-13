@@ -55,7 +55,7 @@ if ($_FILES["f"])
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
 		if ($bmp_width < 40 || $bmp_height < 30)
-			exit("ERROR: bad dimensions (must be at least 40x30");
+			exit("ERROR: bad dimensions (must be at least 40x30)");
 		
 		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
 			exit("ERROR: bad color planes");
