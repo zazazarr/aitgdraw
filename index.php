@@ -5,7 +5,7 @@ function get_key_color ($txt)
 {
 	if (strlen($txt) != 6)
 		return 0xFFFFFF;
-	echo "ok<br>";
+
 	$s = 0;
 	for ($i = 0; $i < 6; $i++)
 	{
@@ -18,7 +18,7 @@ function get_key_color ($txt)
 		$n = ord($txt[$i]) - 48;
 		if ($n > 9)
 			$n = ord($txt[$i])-65+10;
-			echo $n."<br>";
+
 		$s += $n << (20-($i*4));
 	}
 	
@@ -95,8 +95,6 @@ if ($_FILES["f"])
 				$key_color = get_key_color($_POST["clr"]);
 			}
 		}
-		
-		echo "key: ".$key_color."<br>";
 		
 		if ($bmp_bpp == 24)
 		{
