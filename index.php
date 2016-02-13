@@ -54,8 +54,8 @@ if ($_FILES["f"])
 		$bmp_width  = ord($hdr2[4]) + (ord($hdr2[5])<<8) + (ord($hdr2[6])<<16)  + (ord($hdr2[7])<<24);
 		$bmp_height = ord($hdr2[8]) + (ord($hdr2[9])<<8) + (ord($hdr2[10])<<16) + (ord($hdr2[11])<<24);
 		
-		if ($bmp_width < 40 || $bmp_height < 30)
-			exit("ERROR: bad dimensions (must be at least 40x30)");
+		if ($bmp_width != 40 || $bmp_height != 30)
+			exit("ERROR: bad dimensions (must be exactly 40x30)");
 		
 		if (ord($hdr2[12]) != 1 || ord($hdr2[13]) != 0)
 			exit("ERROR: bad color planes");
@@ -168,10 +168,9 @@ else
 {
 ?>
 <head><title>bmp to drawing</title></head>
-bmp must be at least 40x30. cropped if larger<br>
+bmp must be exactly 40x30<br>
 24-bit or 32-bit (ARGB)<br><br>
 <form enctype="multipart/form-data" method="post">
-
 this color is omitted and becomes transparent
 <input type="text" name="clr" value="FFFFFF">(if empty, all colors are kept)<br>
 (only applies to 24-bit bmps)<br>
