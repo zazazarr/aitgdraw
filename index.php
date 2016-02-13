@@ -11,17 +11,15 @@ function get_key_color ($txt)
 	{
 		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= ord('f')))
 			$txt[i] = chr(ord($txt[i]) - 32);
-			echo $txt[i]."<br>";
+			
 		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > ord('9') && ord($txt[i]) < ord('A')) || ord($txt[i]) > ord('F'))
 			return 0xFFFFFF;
 			
 		$n = ord($txt[i]) - 48;
 		if ($n > 9)
 			$n = ord($txt[i])-65+10;
-		
-		$n <<= i*4;
-		
-		$s += $n;
+			echo $n."<br>";
+		$s += $n << (i*4);
 	}
 	
 	return $s;
