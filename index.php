@@ -9,15 +9,15 @@ function get_key_color ($txt)
 	$s = 0;
 	for ($i = 0; $i < 6; $i++)
 	{
-		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= ord('f')))
-			$txt[i] = chr(ord($txt[i]) - 32);
+		if (ord($txt[$i]) >= ord('a') && ord($txt[$i] <= ord('f')))
+			$txt[$i] = chr(ord($txt[$i]) - 32);
 			
-		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > ord('9') && ord($txt[i]) < ord('A')) || ord($txt[i]) > ord('F'))
+		if (ord($txt[$i]) < ord('0') || (ord($txt[$i]) > ord('9') && ord($txt[$i]) < ord('A')) || ord($txt[$i]) > ord('F'))
 			return 0xFFFFFF;
 			
-		$n = ord($txt[i]) - 48;
+		$n = ord($txt[$i]) - 48;
 		if ($n > 9)
-			$n = ord($txt[i])-65+10;
+			$n = ord($txt[$i])-65+10;
 			echo $n."<br>";
 		$s += $n << ($i*4);
 	}
