@@ -19,7 +19,7 @@ function get_key_color ($txt)
 		if ($n > 9)
 			$n = ord($txt[i])-65+10;
 		
-		$n <<= i*8;
+		$n <<= i*4;
 		
 		$s += $n;
 	}
