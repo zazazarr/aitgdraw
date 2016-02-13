@@ -172,12 +172,15 @@ else
 {
 ?>
 <head><title>bmp to drawing</title></head>
-bmp must be exactly 40x30 and 24bpp (Paint works)<br>
-White color means transparent<br>
-maybe I'll add features soon<br><br>
+bmp must be at least 40x30. cropped if larger<br>
+24bpp or 32bpp (ARGB)<br><br>
 <form enctype="multipart/form-data" method="post">
+
+this color is omitted and becomes transparent
+<input type="text" name="clr" value="FFFFFF">(if empty, all colors are kept)<br>
+(only applies to 24-bit bmps)<br>
 <input type="hidden" name="MAX_FILE_SIZE" value="50000">
-<input type="file" name="f">
+<input type="file" name="f"><br>
 <input type="submit">
 </form>
 <br><br>
