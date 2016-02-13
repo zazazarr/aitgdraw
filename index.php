@@ -1,6 +1,32 @@
 
 
 <?php
+function get_key_color ($txt)
+{
+	if (strlen($txt) != 6)
+		return 0xFFFFFF;
+		
+	$s = 0;
+	for ($i = 0; $i < 6; $i++)
+	{
+		if (ord($txt[i]) >= ord('a') && ord($txt[i] <= 'f'))
+			$txt[i] = chr(ord($txt[i]) - 32);
+			
+		if (ord($txt[i]) < ord('0') || (ord($txt[i]) > '9' && ord($txt[i]) < 'A') || ord($txt[i]) > 'F')
+			return 0xFFFFFF;
+			
+		$n = ord($txt[i]) - 48;
+		if ($n > 9)
+			$n = ord($txt[i])-65+10;
+		
+		$n <<= i*8;
+		
+		$s += $n;
+	}
+	
+	return $s;
+}
+
 if ($_FILES["f"])
 {
 	if (is_uploaded_file($_FILES["f"]["tmp_name"]))
@@ -59,7 +85,20 @@ if ($_FILES["f"])
 		
 		$str_out = "";
 		
+		$use_key = FALSE;
 		$key_color = 0xFFFFFF;
+		if ($_POST["clr"])
+		{
+			if (strlen($_POST["clr"]) == 0)
+				$use_key = FALSE;
+			else
+			{
+				$use_key = TRUE;
+				$key_color = get_key_color($_POST["clr"]);
+			}
+		}
+		
+		echo "key: ".$key_color."<br>";
 		
 		if ($bmp_bpp == 24)
 		{
@@ -75,7 +114,7 @@ if ($_FILES["f"])
 					$n = ord($row[$pos]) + (ord($row[$pos+1])<<8) + (ord($row[$pos+2])<<16);
 					$pos += 3;
 					
-					if ($n != $key_color)
+					if ($use_key == FALSE || $n != $key_color)
 					{
 						$clr = sprintf("%X", $n);
 						
@@ -122,10 +161,9 @@ if ($_FILES["f"])
 		echo "<textarea rows=4 cols=20>".$str_out."</textarea>";
 		
 		// TODO select transparent color
-		// TODO 32 bpp
-		// TODO larger than 40x30, truncate
 		// TODO maybe resizing code?
 		// TODO copy file. show preview
+		// TODO closest color for basic board
 		
 		exit("<br> all good");
 	}
