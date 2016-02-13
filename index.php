@@ -99,8 +99,8 @@ if ($_FILES["f"])
 				$pos = 0;
 				for ($p = 0; $p < 40; $p++)
 				{
-					$a = ord($row[$pos]);
-					$n = ord($row[$pos+1]) + (ord($row[$pos+2])<<8) + (ord($row[$pos+3])<<16);
+					$n = ord($row[$pos]) + (ord($row[$pos+1])<<8) + (ord($row[$pos+2])<<16);
+					$a = ord($row[$pos+3]);
 					$pos += 4;
 					
 					if ($a != 0)
