@@ -179,6 +179,8 @@ this color is omitted and becomes transparent
 <input type="submit">
 </form>
 <br><br>
+tested with bmps from Paint and GIMP (transparency works). others should work too
+<br><br>
 <b>DISCLAIMER</b>
 <br>
 whatever it is, I didn't do it. I swear on me mum
