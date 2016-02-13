@@ -154,9 +154,8 @@ if ($_FILES["f"])
 		
 		$str_out .= "END";
 		
-		echo "<textarea rows=4 cols=20>".$str_out."</textarea>";
+		echo "<head><title>bmp to drawing</title></head><textarea rows=4 cols=20>".$str_out."</textarea>";
 		
-		// TODO select transparent color
 		// TODO maybe resizing code?
 		// TODO copy file. show preview
 		// TODO closest color for basic board
