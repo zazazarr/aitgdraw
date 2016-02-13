@@ -37,10 +37,11 @@ if ($_FILES["f"])
 			exit("ERROR: bad color planes");
 		
 		$bmp_bpp = ord($hdr2[14]) + (ord($hdr2[15])<<8);
-		if ($bmp_bpp != 24)
-			exit("ERROR: must be 24 bpp (will add support for 32 soon)");
+		if ($bmp_bpp != 24 && $bmp_bpp != 32)
+			exit("ERROR: must be 24-bit or 32-bit");
 			
-		if (ord($hdr2[16]) != 0 || ord($hdr2[17]) != 0 || ord($hdr2[18]) != 0 || ord($hdr2[19]) != 0)
+		$bmp_comp = ord($hdr2[16]) + (ord($hdr2[17])<<8) + (ord($hdr2[18])<<16)  + (ord($hdr2[19])<<24);
+		if ($bmp_comp != 0 && $bmp_comp != 3)
 			exit("ERROR: compression not supported");
 			
 		if (fseek($f, $pixel_offset, SEEK_SET) != 0)
@@ -58,21 +59,23 @@ if ($_FILES["f"])
 		
 		$str_out = "";
 		
+		$key_color = 0xFFFFFF;
+		
 		if ($bmp_bpp == 24)
 		{
-			for ($i = 0; $i < $bmp_height; $i++)
+			for ($i = 0; $i < 30; $i++)
 			{
 				$row = fread($f, $row_bytes);
 				if ($row == FALSE || strlen($row) != $row_bytes)
 					exit("ERROR: bad data");
 				
 				$pos = 0;
-				for ($p = 0; $p < $bmp_width; $p++)
+				for ($p = 0; $p < 40; $p++)
 				{
 					$n = ord($row[$pos]) + (ord($row[$pos+1])<<8) + (ord($row[$pos+2])<<16);
 					$pos += 3;
 					
-					if ($n != 0xFFFFFF)
+					if ($n != $key_color)
 					{
 						$clr = sprintf("%X", $n);
 						
@@ -81,7 +84,35 @@ if ($_FILES["f"])
 						else
 							$str_out .= 900+(29-$i)*10+$p-30 . "," . $clr . ",100,";
 					}
+				}
+			}
+		}
+		
+		if ($bmp_bpp == 32)
+		{
+			for ($i = 0; $i < 30; $i++)
+			{
+				$row = fread($f, $row_bytes);
+				if ($row == FALSE || strlen($row) != $row_bytes)
+					exit("ERROR: bad data");
+				
+				$pos = 0;
+				for ($p = 0; $p < 40; $p++)
+				{
+					$a = ord($row[$pos]);
+					$n = ord($row[$pos+1]) + (ord($row[$pos+2])<<8) + (ord($row[$pos+3])<<16);
+					$pos += 4;
 					
+					if ($a != 0)
+					{
+						$a_dec = (int)(($a*100)/255);
+						$clr = sprintf("%X", $n);
+						
+						if ($p < 30)
+							$str_out .= (29-$i)*30+$p . "," . $clr . ",".$a_dec.",";
+						else
+							$str_out .= 900+(29-$i)*10+$p-30 . "," . $clr . ",".$a_dec.",";
+					}
 				}
 			}
 		}
